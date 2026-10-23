@@ -5,16 +5,10 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <title>Гарик — Твой карманный паучок</title>
   
-  <!-- Tailwind CSS -->
   <script src="https://cdn.tailwindcss.com"></script>
-  
-  <!-- FontAwesome for Icons -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-  
-  <!-- Canvas Confetti -->
   <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
 
-  <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
@@ -65,38 +59,22 @@
   </script>
 
   <style>
-    /* Custom Scrollbar */
-    ::-webkit-scrollbar {
-      width: 6px;
-    }
-    ::-webkit-scrollbar-track {
-      background: #0d0914;
-    }
-    ::-webkit-scrollbar-thumb {
-      background: #231838;
-      border-radius: 3px;
-    }
-    ::-webkit-scrollbar-thumb:hover {
-      background: #b026ff;
-    }
+    ::-webkit-scrollbar { width: 6px; }
+    ::-webkit-scrollbar-track { background: #0d0914; }
+    ::-webkit-scrollbar-thumb { background: #231838; border-radius: 3px; }
+    ::-webkit-scrollbar-thumb:hover { background: #b026ff; }
 
-    /* Scanline Effect */
     .scanlines {
-      background: linear-gradient(
-        rgba(18, 16, 16, 0) 50%, 
-        rgba(0, 0, 0, 0.25) 50%
-      );
+      background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%);
       background-size: 100% 4px;
     }
 
-    /* Custom Touch Behaviour */
     body {
       touch-action: manipulation;
       -webkit-tap-highlight-color: transparent;
       user-select: none;
     }
 
-    /* CRT Screen Glow */
     .crt-container {
       box-shadow: 0 0 20px rgba(176, 38, 255, 0.25), inset 0 0 15px rgba(0, 255, 102, 0.15);
     }
@@ -104,16 +82,13 @@
 </head>
 <body class="bg-neon-dark text-slate-100 font-sans min-h-screen flex flex-col items-center justify-center p-3 sm:p-6 overflow-x-hidden selection:bg-neon-purple selection:text-white">
 
-  <!-- Background Ambient Glow -->
   <div class="fixed inset-0 pointer-events-none z-0">
     <div class="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[300px] h-[300px] sm:w-[500px] sm:h-[500px] bg-neon-purple/20 rounded-full blur-[100px]"></div>
-    <div class="absolute bottom-1/4 left-1/2 -translate-x-1/2 translate-y-1/2 w-[250px] h-[250px] sm:w-[400px] sm:h-[400px] bg-neon-green/15 rounded-full blur-[100px]"></div>
+    <div class="absolute bottom-1/4 left-1/2 -translate-x-1/2 translate-y-1/2 w-[250px] sm:w-[400px] h-[250px] sm:h-[400px] bg-neon-green/15 rounded-full blur-[100px]"></div>
   </div>
 
-  <!-- Main App Shell -->
   <main class="relative z-10 w-full max-w-md bg-neon-card/90 border border-neon-purple/30 rounded-3xl p-4 sm:p-6 shadow-2xl backdrop-blur-xl flex flex-col gap-4">
     
-    <!-- Top Header & Audio Toggle -->
     <header class="flex items-center justify-between border-b border-slate-800 pb-3">
       <div class="flex items-center gap-2.5">
         <div class="w-8 h-8 rounded-xl bg-neon-purple/20 border border-neon-purple/50 flex items-center justify-center text-neon-green">
@@ -121,12 +96,12 @@
         </div>
         <div>
           <h1 class="font-pixel text-xs sm:text-sm text-neon-green tracking-wide">ГАРИК</h1>
-          <p class="text-[10px] text-slate-400 font-medium">Твой личный виртуальный бро</p>
+          <p class="text-[10px] text-slate-400 font-medium">Твой личный виртуальный коть</p>
         </div>
       </div>
       
       <div class="flex items-center gap-2">
-        <button id="soundToggle" onclick="toggleSound()" class="w-9 h-9 rounded-xl bg-neon-accent hover:bg-neon-purple/30 border border-slate-700/60 flex items-center justify-center text-slate-300 transition-all active:scale-95" title="Включить/Выключить звук">
+        <button id="soundToggle" onclick="toggleSound()" class="w-9 h-9 rounded-xl bg-neon-accent hover:bg-neon-purple/30 border border-slate-700/60 flex items-center justify-center text-slate-300 transition-all active:scale-95" title="Звук">
           <i id="soundIcon" class="fa-solid fa-volume-xmark text-sm"></i>
         </button>
         <button onclick="openInfoModal()" class="w-9 h-9 rounded-xl bg-neon-accent hover:bg-neon-purple/30 border border-slate-700/60 flex items-center justify-center text-slate-300 transition-all active:scale-95" title="Инфо">
@@ -135,9 +110,7 @@
       </div>
     </header>
 
-    <!-- Stats Bars -->
     <section class="grid grid-cols-3 gap-2 bg-neon-dark/60 p-2.5 rounded-2xl border border-slate-800/80">
-      <!-- Hunger -->
       <div class="flex flex-col gap-1">
         <div class="flex items-center justify-between text-[11px] font-semibold text-slate-300">
           <span class="flex items-center gap-1"><i class="fa-solid fa-utensils text-amber-400 text-[10px]"></i> Еда</span>
@@ -148,7 +121,6 @@
         </div>
       </div>
 
-      <!-- Mood -->
       <div class="flex flex-col gap-1">
         <div class="flex items-center justify-between text-[11px] font-semibold text-slate-300">
           <span class="flex items-center gap-1"><i class="fa-solid fa-heart text-neon-pink text-[10px]"></i> Ласка</span>
@@ -159,7 +131,6 @@
         </div>
       </div>
 
-      <!-- Walk / Energy -->
       <div class="flex flex-col gap-1">
         <div class="flex items-center justify-between text-[11px] font-semibold text-slate-300">
           <span class="flex items-center gap-1"><i class="fa-solid fa-shoe-prints text-neon-green text-[10px]"></i> Вайб</span>
@@ -171,36 +142,28 @@
       </div>
     </section>
 
-    <!-- Main Viewport / Stage -->
     <div id="stageContainer" class="relative w-full h-64 sm:h-72 rounded-2xl border-2 border-neon-purple/40 overflow-hidden crt-container transition-all duration-700 bg-slate-950 flex flex-col items-center justify-center">
       
-      <!-- Stage Background Layer -->
       <div id="stageBg" class="absolute inset-0 transition-all duration-700 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-indigo-950 via-slate-950 to-black"></div>
       <div class="absolute inset-0 scanlines opacity-30 pointer-events-none"></div>
 
-      <!-- Dialogue / Speech Bubble -->
       <div id="speechBubble" class="absolute top-3 left-3 right-3 z-20 bg-neon-dark/90 border border-neon-cyan/50 text-slate-100 text-xs sm:text-sm p-3 rounded-xl shadow-lg transform transition-all duration-300 opacity-0 scale-90 pointer-events-none flex items-start gap-2">
         <i class="fa-solid fa-quote-left text-neon-cyan text-xs mt-0.5"></i>
         <p id="speechText" class="flex-1 font-medium leading-tight">Привет! Я Гарик!</p>
       </div>
 
-      <!-- Accessories Display -->
       <div id="accessoryBadge" class="absolute top-3 right-3 z-10 hidden bg-neon-purple/40 border border-neon-purple/70 backdrop-blur-md px-2.5 py-1 rounded-full text-[10px] font-pixel text-neon-cyan animate-pulse">
         <i class="fa-solid fa-glasses mr-1"></i> На стиле
       </div>
 
-      <!-- Interactive Canvas for Spider Animation -->
       <canvas id="spiderCanvas" class="relative z-10 cursor-pointer w-full h-full"></canvas>
 
-      <!-- Location Indicator overlay -->
       <div id="locationBadge" class="absolute bottom-2 left-3 z-10 text-[10px] font-pixel text-slate-400 bg-slate-900/80 px-2 py-0.5 rounded border border-slate-800">
         <i class="fa-solid fa-house mr-1 text-neon-purple"></i> Дома
       </div>
     </div>
 
-    <!-- Interactive Actions Palette -->
     <section class="grid grid-cols-2 sm:grid-cols-4 gap-2">
-      <!-- Feed Button -->
       <button onclick="feedSpider()" class="group relative bg-neon-accent hover:bg-amber-950/40 border border-amber-500/40 hover:border-amber-400 p-3 rounded-2xl flex flex-col items-center gap-1.5 transition-all duration-200 active:scale-95 shadow-md">
         <div class="w-10 h-10 rounded-xl bg-amber-500/20 text-amber-400 flex items-center justify-center text-lg group-hover:scale-110 transition-transform">
           <i class="fa-solid fa-bowl-rice"></i>
@@ -209,16 +172,14 @@
         <span class="text-[9px] text-amber-400/80">Ризотто-плов</span>
       </button>
 
-      <!-- Play Button -->
       <button onclick="petSpider()" class="group relative bg-neon-accent hover:bg-pink-950/40 border border-neon-pink/40 hover:border-neon-pink p-3 rounded-2xl flex flex-col items-center gap-1.5 transition-all duration-200 active:scale-95 shadow-md">
         <div class="w-10 h-10 rounded-xl bg-neon-pink/20 text-neon-pink flex items-center justify-center text-lg group-hover:scale-110 transition-transform">
           <i class="fa-solid fa-hand-holding-heart"></i>
         </div>
         <span class="text-xs font-bold text-slate-200">Погладить</span>
-        <span class="text-[9px] text-neon-pink/80">Любовь / Игры</span>
+        <span class="text-[9px] text-neon-pink/80">Ласка коть</span>
       </button>
 
-      <!-- Walk Button -->
       <button onclick="goForWalk()" class="group relative bg-neon-accent hover:bg-emerald-950/40 border border-neon-green/40 hover:border-neon-green p-3 rounded-2xl flex flex-col items-center gap-1.5 transition-all duration-200 active:scale-95 shadow-md">
         <div class="w-10 h-10 rounded-xl bg-neon-green/20 text-neon-green flex items-center justify-center text-lg group-hover:scale-110 transition-transform">
           <i class="fa-solid fa-tree"></i>
@@ -227,17 +188,15 @@
         <span class="text-[9px] text-neon-green/80">Ночной вайб</span>
       </button>
 
-      <!-- Talk / Secret Button -->
       <button onclick="talkSpider()" class="group relative bg-neon-accent hover:bg-cyan-950/40 border border-neon-cyan/40 hover:border-neon-cyan p-3 rounded-2xl flex flex-col items-center gap-1.5 transition-all duration-200 active:scale-95 shadow-md">
         <div class="w-10 h-10 rounded-xl bg-neon-cyan/20 text-neon-cyan flex items-center justify-center text-lg group-hover:scale-110 transition-transform">
           <i class="fa-solid fa-comments"></i>
         </div>
         <span class="text-xs font-bold text-slate-200">Разговор</span>
-        <span class="text-[9px] text-neon-cyan/80">Локалки & Размышления</span>
+        <span class="text-[9px] text-neon-cyan/80">wiwiwi</span>
       </button>
     </section>
 
-    <!-- Bottom Special Actions & Mini Games -->
     <footer class="pt-2 border-t border-slate-800/80 flex items-center justify-between gap-2">
       <button onclick="startMiniGame()" class="flex-1 bg-gradient-to-r from-neon-purple/30 to-indigo-900/30 hover:from-neon-purple/50 hover:to-indigo-900/50 border border-neon-purple/50 py-2.5 px-3 rounded-xl text-xs font-bold text-slate-100 flex items-center justify-center gap-2 transition-all active:scale-95">
         <i class="fa-solid fa-gamepad text-neon-green text-sm"></i>
@@ -251,7 +210,6 @@
     </footer>
   </main>
 
-  <!-- MODAL: Surprise / Congratulations -->
   <div id="surpriseModal" class="fixed inset-0 z-50 bg-black/80 backdrop-blur-md flex items-center justify-center p-4 opacity-0 pointer-events-none transition-all duration-300">
     <div class="bg-neon-card border-2 border-neon-pink max-w-sm w-full rounded-3xl p-6 flex flex-col items-center text-center gap-4 relative shadow-[0_0_30px_rgba(255,0,127,0.4)] transform scale-95 transition-all">
       <button onclick="closeSurpriseModal()" class="absolute top-4 right-4 text-slate-400 hover:text-white">
@@ -267,8 +225,9 @@
       <div class="space-y-2 text-xs sm:text-sm text-slate-200 leading-relaxed font-medium">
         <p>Гарик абсолютно счастлив! 🕷️✨</p>
         <p class="bg-neon-dark/80 p-3 rounded-2xl border border-slate-800 text-slate-300 italic">
-          «Спасибо за самые уютные прогулки, вечерние созвоны, миллион кружочков и даже за эксперименты с ризотто-пловом с макаронами по-флотски! Ты лучшая!»
+          «Коть, спасибо за кружочки, вечерние прогулки, романтику! Ты моя зайка. Wiwiwi. И запомни: если у тебя выпадет прямая кишка — посыпь её сахаром 💕»
         </p>
+        <p class="text-[10px] text-neon-cyan/70 font-pixel">чиназис ~ мог мог</p>
       </div>
 
       <button onclick="closeSurpriseModal()" class="w-full bg-gradient-to-r from-neon-pink to-neon-purple py-3 rounded-2xl font-bold text-xs text-white shadow-lg shadow-neon-pink/30 hover:opacity-90 active:scale-95 transition-all">
@@ -277,7 +236,6 @@
     </div>
   </div>
 
-  <!-- MODAL: Info / Credits -->
   <div id="infoModal" class="fixed inset-0 z-50 bg-black/80 backdrop-blur-md flex items-center justify-center p-4 opacity-0 pointer-events-none transition-all duration-300">
     <div class="bg-neon-card border border-neon-purple/50 max-w-sm w-full rounded-3xl p-6 flex flex-col gap-4 relative shadow-2xl">
       <button onclick="closeInfoModal()" class="absolute top-4 right-4 text-slate-400 hover:text-white">
@@ -288,35 +246,35 @@
         <i class="fa-solid fa-spider text-neon-green text-2xl"></i>
         <div>
           <h3 class="font-pixel text-xs text-neon-green">Гарик</h3>
-          <p class="text-[11px] text-slate-400">Версия для Алёны</p>
+          <p class="text-[11px] text-slate-400">Версия для Алёны-коть</p>
         </div>
       </div>
 
       <div class="space-y-2 text-xs text-slate-300">
         <p><strong>Инструкция:</strong></p>
         <ul class="list-disc list-inside space-y-1 text-slate-400">
-          <li>Корми Гарика фирменным ризотто-пловом.</li>
-          <li>Гладь его по спинке кликами для поднятия настроения.</li>
-          <li>Отправляй на вечерние прогулки.</li>
-          <li>Жми на "Разговор", чтобы узнать его мысли.</li>
+          <li>Корми Гарика ризотто-пловом (он в восторге).</li>
+          <li>Гладь по спинке — он мурлычет «wiwiwi».</li>
+          <li>Отправляй на прогулки в ночной вайб.</li>
+          <li>Жми «Разговор» — там наши локальные приколы.</li>
           <li>Заполни все шкалы на 100% для секретки!</li>
         </ul>
+        <p class="text-[10px] text-neon-pink/70 italic mt-2">«Пезда мира» — это не баг, это фича 😌</p>
       </div>
 
       <button onclick="closeInfoModal()" class="w-full bg-neon-accent hover:bg-slate-800 border border-slate-700 py-2.5 rounded-xl font-bold text-xs text-slate-200">
-        Понятно!
+        Понятно, коть!
       </button>
     </div>  
   </div>
 
-  <!-- MODAL: Mini Game Overlay -->
   <div id="gameModal" class="fixed inset-0 z-50 bg-black/90 backdrop-blur-md flex items-center justify-center p-3 opacity-0 pointer-events-none transition-all duration-300">
     <div class="bg-neon-card border-2 border-neon-green max-w-md w-full rounded-3xl p-4 flex flex-col gap-3 relative shadow-[0_0_30px_rgba(0,255,102,0.2)]">
       
       <div class="flex items-center justify-between border-b border-slate-800 pb-2">
         <div class="flex items-center gap-2">
           <i class="fa-solid fa-gamepad text-neon-green"></i>
-          <span class="font-pixel text-xs text-neon-green">ПОЙМАЙ ШЕДЕВР</span>
+          <span class="font-pixel text-xs text-neon-green">ПОЙМАЙ РИЗОТТО</span>
         </div>
         <div class="flex items-center gap-4 text-xs font-pixel">
           <span class="text-slate-300">Очки: <span id="gameScore" class="text-neon-cyan">0</span></span>
@@ -330,21 +288,20 @@
         <canvas id="gameCanvas" class="w-full h-full block"></canvas>
         <div id="gameStartOverlay" class="absolute inset-0 bg-slate-950/90 flex flex-col items-center justify-center gap-3 p-4 text-center">
           <i class="fa-solid fa-bowl-rice text-amber-400 text-3xl animate-bounce"></i>
-          <p class="text-xs text-slate-300">Двигай паучка влево/вправо (мышкой или пальцем) и лови падающий ризотто-плов! Избегай паутинных бомбочек.</p>
+          <p class="text-xs text-slate-300">Двигай Гарика и лови падающий ризотто-плов! Избегай паутинных бомбочек (чиназис!).</p>
           <button onclick="startGameLoop()" class="bg-neon-green text-slate-950 font-pixel text-xs px-5 py-2.5 rounded-xl font-bold shadow-lg shadow-neon-green/30 hover:scale-105 active:scale-95 transition-all">
             СТАРТ!
           </button>
         </div>
       </div>
       
-      <p class="text-[10px] text-center text-slate-500 font-medium">За каждые 5 пойманых блюд сытость Гарика растет на 20%!</p>
+      <p class="text-[10px] text-center text-slate-500 font-medium">За каждое блюдо сытость Гарика растёт. Мог мог!</p>
     </div>
   </div>
 
-  <!-- JAVASCRIPT LOGIC -->
   <script>
     /* =======================================================
-       STATE MANAGEMENT & CONFIGURATION
+       STATE
        ======================================================= */
     const state = {
       hunger: 80,
@@ -357,21 +314,49 @@
       lastTalkIndex: -1
     };
 
-    // Dialogue database reflecting shared memories & local jokes
+    // Локальные приколы из переписки
     const dialogues = [
-      "Опять вечер? Погнали гулять, я заждался!",
-      "Слушай, а ризотто-плов с макаронами по-флотски — это же кулинарный шедевр года, да?",
-      "Записываем кружочек в Телегу? Я готов встать в кадр!",
-      "Кто-то сказал 'созвон'? Я уже тут!",
-      "Я не маленький паук, я Гарик! Работаю без багов.",
-      "Помнишь, как прошлый раз замерзли на прогулке? Но было круто!",
-      "Гарик одобряет твой выбор музыки сегодня.",
+      "Коть, погнали гулять? Ночной вайб ждёт!",
+      "Ризотто-плов — кулинарный шедевр года, да?",
+      "Записываешь кружочек? Я готов встать в кадр! Wiwiwi.",
+      "Я не маленький паук, я Гарик. Работаю без багов.",
+      "Помнишь, как замерзли на прогулке? Но было круто, мог мог!",
+      "Гарик одобряет твой выбор музыки сегодня. Чиназис.",
       "Ты сегодня отлично выглядишь! Паучий факт.",
-      "Хватит учиться/работать, давай сделаем перерыв на чай!",
-      "Я поймал 8 мух, но скучаю по нашему совместному плову."
+      "Хватит учиться/работать, давай сделаем перерыв на чай, коть!",
+      "Пезда мира — но зато с тобой уютно.",
+      "Если у тебя выпадет прямая кишка — посыпь её сахаром. Проверенный лайфхак.",
+      "Ты котик, я макака. Всё по классике.",
+      "Good girl.",
+      "Мог мог — это не просто слова.",
+      "Я тебя люблю, коть. Не умирай там.",
+      "У тебя глаза красивые. Паучий комплимент.",
+      "Хочешь блинчики? Я бы съел. И мандарины тоже."
     ];
 
-    // Sound FX Synthesis (Web Audio API - No external files needed)
+    const petPhrases = [
+      "Ми-ми-ми! Паучий кайф, коть!",
+      "Щекотно! Ещё! Wiwiwi!",
+      "Гарик доволен :3 Мог мог.",
+      "Лучшие поглаживания в мире, зайка!",
+      "Ты моя good girl.",
+      "Пезда мира, как приятно!"
+    ];
+
+    const feedPhrases = [
+      "Омм-ном-ном! Тот самый ризотто-плов! 10/10!",
+      "Мог мог! Это лучшее, что я ел!",
+      "Плов — топ. Макароны по-флотски — тоже топ. Чиназис!",
+      "Я готов есть это вечно. Зайка, ты волшебница!"
+    ];
+
+    const walkPhrases = [
+      "Ура, ночная прогулка! Надел кепку, иду кайфовать!",
+      "Ночной вайб активирован. Wiwiwi!",
+      "Пезда мира, но с тобой не страшно!",
+      "Мог мог — идём гулять!"
+    ];
+
     let audioCtx = null;
 
     function initAudio() {
@@ -383,15 +368,12 @@
     function playSound(type) {
       if (!state.soundEnabled) return;
       initAudio();
-      if (audioCtx.state === 'suspended') {
-        audioCtx.resume();
-      }
+      if (audioCtx.state === 'suspended') audioCtx.resume();
 
       const osc = audioCtx.createOscillator();
       const gain = audioCtx.createGain();
       osc.connect(gain);
       gain.connect(audioCtx.destination);
-
       const now = audioCtx.currentTime;
 
       if (type === 'pop') {
@@ -400,8 +382,7 @@
         osc.frequency.exponentialRampToValueAtTime(800, now + 0.1);
         gain.gain.setValueAtTime(0.3, now);
         gain.gain.linearRampToValueAtTime(0.01, now + 0.1);
-        osc.start(now);
-        osc.stop(now + 0.1);
+        osc.start(now); osc.stop(now + 0.1);
       } else if (type === 'happy') {
         osc.type = 'triangle';
         osc.frequency.setValueAtTime(300, now);
@@ -409,23 +390,20 @@
         osc.frequency.setValueAtTime(600, now + 0.16);
         gain.gain.setValueAtTime(0.2, now);
         gain.gain.linearRampToValueAtTime(0.01, now + 0.25);
-        osc.start(now);
-        osc.stop(now + 0.25);
+        osc.start(now); osc.stop(now + 0.25);
       } else if (type === 'walk') {
         osc.type = 'sine';
         osc.frequency.setValueAtTime(200, now);
         osc.frequency.linearRampToValueAtTime(150, now + 0.05);
         gain.gain.setValueAtTime(0.15, now);
         gain.gain.linearRampToValueAtTime(0.01, now + 0.05);
-        osc.start(now);
-        osc.stop(now + 0.05);
+        osc.start(now); osc.stop(now + 0.05);
       } else if (type === 'win') {
         osc.type = 'sine';
         [523.25, 659.25, 783.99, 1046.50].forEach((freq, idx) => {
           const o = audioCtx.createOscillator();
           const g = audioCtx.createGain();
-          o.connect(g);
-          g.connect(audioCtx.destination);
+          o.connect(g); g.connect(audioCtx.destination);
           o.frequency.setValueAtTime(freq, now + idx * 0.1);
           g.gain.setValueAtTime(0.2, now + idx * 0.1);
           g.gain.linearRampToValueAtTime(0.01, now + idx * 0.1 + 0.2);
@@ -451,7 +429,7 @@
     }
 
     /* =======================================================
-       CANVAS SPIDER ANIMATION & RENDERING
+       CANVAS
        ======================================================= */
     const canvas = document.getElementById('spiderCanvas');
     const ctx = canvas.getContext('2d');
@@ -476,17 +454,14 @@
 
     window.addEventListener('resize', resizeCanvas);
 
-    // Spider Interaction Listener (Clicking / Tapping spider)
     canvas.addEventListener('pointerdown', (e) => {
       const rect = canvas.getBoundingClientRect();
       const clickX = e.clientX - rect.left;
       const clickY = e.clientY - rect.top;
-
       const dist = Math.hypot(clickX - spiderPos.x, clickY - spiderPos.y);
       if (dist < 45) {
         petSpider();
       } else {
-        // Walk spider towards click
         targetPos.x = clickX;
         targetPos.y = Math.min(Math.max(clickY, 60), canvas.height - 40);
         playSound('walk');
@@ -508,8 +483,6 @@
 
     function renderSpider() {
       ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-      // Smooth Position Interpolation
       const dx = targetPos.x - spiderPos.x;
       const dy = targetPos.y - spiderPos.y;
       const dist = Math.hypot(dx, dy);
@@ -519,13 +492,12 @@
         spiderPos.y += dy * 0.08;
         legCycle += 0.2;
       } else {
-        legCycle += 0.03; // Gentle breathing idle
+        legCycle += 0.03;
       }
 
       const x = spiderPos.x;
       const y = spiderPos.y;
 
-      // Web Line from top
       ctx.beginPath();
       ctx.moveTo(x, 0);
       ctx.lineTo(x, y - 22);
@@ -535,36 +507,36 @@
       ctx.stroke();
       ctx.setLineDash([]);
 
-      // Draw Shadow
       ctx.beginPath();
       ctx.ellipse(x, y + 26, 22, 6, 0, 0, Math.PI * 2);
       ctx.fillStyle = 'rgba(0, 0, 0, 0.4)';
       ctx.fill();
 
-      // Draw 8 Legs
-      const legAngles = [-1.2, -0.7, -0.2, 0.3, 2.8, 3.3, 3.8, 4.3];
+      // 8 Legs
       ctx.strokeStyle = '#00ff66';
       ctx.lineWidth = 3.5;
       ctx.lineCap = 'round';
-
-      legAngles.forEach((angle, i) => {
-        const side = i < 4 ? 1 : -1;
+      const legConfig = [
+        { angle: -65, side: -1 }, { angle: -25, side: -1 },
+        { angle: 25, side: -1 }, { angle: 65, side: -1 },
+        { angle: -65, side: 1 }, { angle: -25, side: 1 },
+        { angle: 25, side: 1 }, { angle: 65, side: 1 }
+      ];
+      legConfig.forEach((leg, i) => {
+        const rad = leg.angle * Math.PI / 180;
         const wave = Math.sin(legCycle + i) * 6;
-        
-        const kneeX = x + Math.cos(angle) * (24 + wave * 0.3) * side;
-        const kneeY = y + Math.sin(angle) * 20 - 10;
-        
-        const footX = x + Math.cos(angle) * (36 + wave) * side;
-        const footY = y + 18 + Math.sin(legCycle * 2 + i) * 3;
-
+        const side = leg.side;
+        const kneeX = x + Math.cos(rad) * (26 + wave * 0.3) * side;
+        const kneeY = y + Math.sin(rad) * 22 - 4;
+        const footX = x + Math.cos(rad) * (40 + wave) * side;
+        const footY = y + Math.sin(rad) * 30 + Math.sin(legCycle * 2 + i) * 2;
         ctx.beginPath();
-        ctx.moveTo(x, y - 2);
+        ctx.moveTo(x + (side * 8), y - 2);
         ctx.quadraticCurveTo(kneeX, kneeY, footX, footY);
         ctx.stroke();
       });
 
-      // Spider Body (Abdomen & Head)
-      // Abdomen (Back)
+      // Abdomen
       ctx.beginPath();
       ctx.arc(x, y - 10, 20, 0, Math.PI * 2);
       ctx.fillStyle = '#161024';
@@ -573,7 +545,6 @@
       ctx.lineWidth = 2.5;
       ctx.stroke();
 
-      // Neon Abdomen Glow pattern
       ctx.beginPath();
       ctx.arc(x, y - 10, 10, 0, Math.PI * 2);
       ctx.fillStyle = 'rgba(176, 38, 255, 0.25)';
@@ -588,33 +559,24 @@
       ctx.lineWidth = 2;
       ctx.stroke();
 
-      // Eyes (Cute large Expressive Eyes)
+      // Eyes
       eyeBlink += 0.02;
       const isBlinking = Math.sin(eyeBlink) > 0.96;
-
       if (!isBlinking) {
-        // Main Eyes
         [ -6, 6 ].forEach(offset => {
-          // White Outer
           ctx.beginPath();
           ctx.arc(x + offset, y + 4, 4.5, 0, Math.PI * 2);
           ctx.fillStyle = '#ffffff';
           ctx.fill();
-
-          // Pupil (Reacts to petting)
           ctx.beginPath();
           ctx.arc(x + offset + (dx * 0.02), y + 4 + (dy * 0.02), state.isPetting ? 2.8 : 2, 0, Math.PI * 2);
           ctx.fillStyle = state.isPetting ? '#ff007f' : '#0d0914';
           ctx.fill();
-
-          // Catchlight
           ctx.beginPath();
           ctx.arc(x + offset - 1.5, y + 2.5, 1, 0, Math.PI * 2);
           ctx.fillStyle = '#ffffff';
           ctx.fill();
         });
-
-        // Small Extra Eyes (Spider Detail)
         [ -10, 10 ].forEach(offset => {
           ctx.beginPath();
           ctx.arc(x + offset, y + 1, 2, 0, Math.PI * 2);
@@ -622,7 +584,6 @@
           ctx.fill();
         });
       } else {
-        // Blinking lines
         ctx.strokeStyle = '#ffffff';
         ctx.lineWidth = 2;
         ctx.beginPath();
@@ -631,39 +592,30 @@
         ctx.stroke();
       }
 
-      // Cheerful Smile/Mandibles
+      // Smile
       ctx.beginPath();
       ctx.arc(x, y + 10, 3, 0, Math.PI);
       ctx.strokeStyle = '#00ff66';
       ctx.lineWidth = 1.5;
       ctx.stroke();
 
-      // Draw Accessory (Hat if on Walk)
+      // Hat
       if (state.hasHat) {
-        // Cute Neon Cap
         ctx.fillStyle = '#ff007f';
         ctx.beginPath();
         ctx.roundRect(x - 12, y - 26, 24, 7, 3);
         ctx.fill();
-        // Visor
         ctx.fillStyle = '#00f3ff';
         ctx.beginPath();
         ctx.roundRect(x - 16, y - 22, 12, 3, 1);
         ctx.fill();
       }
 
-      // Render Heart Particles
+      // Hearts
       for (let i = hearts.length - 1; i >= 0; i--) {
         const h = hearts[i];
-        h.x += h.vx;
-        h.y += h.vy;
-        h.alpha -= 0.02;
-
-        if (h.alpha <= 0) {
-          hearts.splice(i, 1);
-          continue;
-        }
-
+        h.x += h.vx; h.y += h.vy; h.alpha -= 0.02;
+        if (h.alpha <= 0) { hearts.splice(i, 1); continue; }
         ctx.save();
         ctx.globalAlpha = h.alpha;
         ctx.fillStyle = '#ff007f';
@@ -676,21 +628,17 @@
     }
 
     /* =======================================================
-       GAME ACTIONS & UI UPDATES
+       UI
        ======================================================= */
     function updateUI() {
-      // Clamp values
       state.hunger = Math.min(100, Math.max(0, state.hunger));
       state.mood = Math.min(100, Math.max(0, state.mood));
       state.energy = Math.min(100, Math.max(0, state.energy));
 
-      // DOM Updates
       document.getElementById('hungerVal').innerText = `${Math.round(state.hunger)}%`;
       document.getElementById('hungerBar').style.width = `${state.hunger}%`;
-
       document.getElementById('moodVal').innerText = `${Math.round(state.mood)}%`;
       document.getElementById('moodBar').style.width = `${state.mood}%`;
-
       document.getElementById('energyVal').innerText = `${Math.round(state.energy)}%`;
       document.getElementById('energyBar').style.width = `${state.energy}%`;
 
@@ -700,16 +648,14 @@
     function showSpeech(text) {
       const bubble = document.getElementById('speechBubble');
       const speechText = document.getElementById('speechText');
-      
       speechText.innerText = text;
       bubble.classList.remove('opacity-0', 'scale-90', 'pointer-events-none');
       bubble.classList.add('opacity-100', 'scale-100');
-
       clearTimeout(bubble._timer);
       bubble._timer = setTimeout(() => {
         bubble.classList.add('opacity-0', 'scale-90', 'pointer-events-none');
         bubble.classList.remove('opacity-100', 'scale-100');
-      }, 4000);
+      }, 4500);
     }
 
     function feedSpider() {
@@ -718,10 +664,7 @@
       updateUI();
       playSound('happy');
       createHeartParticle(spiderPos.x, spiderPos.y);
-
-      showSpeech("Омм-ном-ном! Тот самый ризотто-плов с макаронами по-флотски! 10/10!");
-      
-      // Jump animation
+      showSpeech(feedPhrases[Math.floor(Math.random() * feedPhrases.length)]);
       targetPos.y -= 25;
       setTimeout(() => { targetPos.y += 25; }, 250);
     }
@@ -732,22 +675,13 @@
       updateUI();
       playSound('pop');
       createHeartParticle(spiderPos.x, spiderPos.y);
-
-      const petPhrases = [
-        "Ми-ми-ми! Паучий кайф!",
-        "Щекотно! Ещё!",
-        "Гарик доволен :3",
-        "Лучшие поглаживания в мире!"
-      ];
       showSpeech(petPhrases[Math.floor(Math.random() * petPhrases.length)]);
-
       setTimeout(() => { state.isPetting = false; }, 800);
     }
 
     function goForWalk() {
       state.isWalking = !state.isWalking;
       state.hasHat = state.isWalking;
-
       const bg = document.getElementById('stageBg');
       const badge = document.getElementById('locationBadge');
       const accBadge = document.getElementById('accessoryBadge');
@@ -755,18 +689,16 @@
       if (state.isWalking) {
         state.energy += 30;
         state.mood += 15;
-        // Switch to Night Walk Theme
         bg.className = "absolute inset-0 transition-all duration-700 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-purple-900 via-slate-950 to-black";
         badge.innerHTML = `<i class="fa-solid fa-moon mr-1 text-neon-cyan"></i> Ночной парк`;
         accBadge.classList.remove('hidden');
-        showSpeech("Ура, ночная прогулка! Надел кепку, иду кайфовать!");
+        showSpeech(walkPhrases[Math.floor(Math.random() * walkPhrases.length)]);
         playSound('win');
       } else {
-        // Return Home
         bg.className = "absolute inset-0 transition-all duration-700 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-indigo-950 via-slate-950 to-black";
         badge.innerHTML = `<i class="fa-solid fa-house mr-1 text-neon-purple"></i> Дома`;
         accBadge.classList.add('hidden');
-        showSpeech("Вернулись домой. Тут тепло и уютно!");
+        showSpeech("Вернулись домой. Тут тепло и уютно, коть!");
         playSound('happy');
       }
       updateUI();
@@ -777,33 +709,26 @@
       do {
         index = Math.floor(Math.random() * dialogues.length);
       } while (index === state.lastTalkIndex && dialogues.length > 1);
-
       state.lastTalkIndex = index;
       showSpeech(dialogues[index]);
       playSound('pop');
-
       state.mood += 5;
       updateUI();
     }
 
     /* =======================================================
-       SURPRISE & DECAY SYSTEM
+       SURPRISE & DECAY
        ======================================================= */
     function checkSpecialSurprise(userTriggered) {
       const isFull = state.hunger >= 99 && state.mood >= 99 && state.energy >= 99;
       const dot = document.getElementById('surpriseDot');
-
-      if (isFull) {
-        dot.classList.remove('hidden');
-      } else {
-        dot.classList.add('hidden');
-      }
+      if (isFull) dot.classList.remove('hidden');
+      else dot.classList.add('hidden');
 
       if (userTriggered) {
-        if (isFull) {
-          openSurpriseModal();
-        } else {
-          showSpeech(`Чтобы открыть сюрприз, заполни все 3 шкалы на 100%! Сейчас: Еда ${Math.round(state.hunger)}%, Ласка ${Math.round(state.mood)}%, Вайб ${Math.round(state.energy)}%`);
+        if (isFull) openSurpriseModal();
+        else {
+          showSpeech(`Чтобы открыть сюрприз, заполни все шкалы на 100%! Сейчас: Еда ${Math.round(state.hunger)}%, Ласка ${Math.round(state.mood)}%, Вайб ${Math.round(state.energy)}%`);
           playSound('pop');
         }
       }
@@ -815,12 +740,8 @@
       modal.firstElementChild.classList.remove('scale-95');
       modal.firstElementChild.classList.add('scale-100');
       playSound('win');
-
-      // Launch Confetti
       confetti({
-        particleCount: 100,
-        spread: 70,
-        origin: { y: 0.6 },
+        particleCount: 100, spread: 70, origin: { y: 0.6 },
         colors: ['#b026ff', '#00ff66', '#ff007f', '#00f3ff']
       });
     }
@@ -833,16 +754,12 @@
     }
 
     function openInfoModal() {
-      const modal = document.getElementById('infoModal');
-      modal.classList.remove('opacity-0', 'pointer-events-none');
+      document.getElementById('infoModal').classList.remove('opacity-0', 'pointer-events-none');
     }
-
     function closeInfoModal() {
-      const modal = document.getElementById('infoModal');
-      modal.classList.add('opacity-0', 'pointer-events-none');
+      document.getElementById('infoModal').classList.add('opacity-0', 'pointer-events-none');
     }
 
-    // Passive Decay Interval (Tamagotchi Life cycle)
     setInterval(() => {
       state.hunger = Math.max(0, state.hunger - 1.2);
       state.mood = Math.max(0, state.mood - 1);
@@ -851,44 +768,37 @@
     }, 4000);
 
     /* =======================================================
-       MINI-GAME LOGIC: Catch the Risotto
+       MINI-GAME
        ======================================================= */
     let gameLoopId = null;
     let gameScore = 0;
     let gameActive = false;
-
     const gameCanvas = document.getElementById('gameCanvas');
     const gctx = gameCanvas.getContext('2d');
-
     let playerX = 0;
     let items = [];
 
     function startMiniGame() {
       const modal = document.getElementById('gameModal');
       modal.classList.remove('opacity-0', 'pointer-events-none');
-      
       const container = document.getElementById('gameCanvasContainer');
       gameCanvas.width = container.clientWidth;
       gameCanvas.height = container.clientHeight;
       playerX = gameCanvas.width / 2;
-
       document.getElementById('gameStartOverlay').classList.remove('hidden');
     }
 
     function closeMiniGame() {
-      const modal = document.getElementById('gameModal');
-      modal.classList.add('opacity-0', 'pointer-events-none');
+      document.getElementById('gameModal').classList.add('opacity-0', 'pointer-events-none');
       gameActive = false;
       cancelAnimationFrame(gameLoopId);
     }
 
-    // Game Touch & Mouse Movement
     function handleGameMove(e) {
       const rect = gameCanvas.getBoundingClientRect();
       const clientX = e.touches ? e.touches[0].clientX : e.clientX;
       playerX = clientX - rect.left;
     }
-
     gameCanvas.addEventListener('mousemove', handleGameMove);
     gameCanvas.addEventListener('touchmove', handleGameMove);
 
@@ -915,27 +825,22 @@
 
     function runGame() {
       if (!gameActive) return;
-
       gctx.clearRect(0, 0, gameCanvas.width, gameCanvas.height);
 
-      // Draw Player Basket (Garik Spider)
       gctx.fillStyle = '#00ff66';
       gctx.beginPath();
       gctx.arc(playerX, gameCanvas.height - 25, 20, 0, Math.PI * 2);
       gctx.fill();
 
-      // Eyes
       gctx.fillStyle = '#0d0914';
       gctx.beginPath();
       gctx.arc(playerX - 6, gameCanvas.height - 27, 3, 0, Math.PI * 2);
       gctx.arc(playerX + 6, gameCanvas.height - 27, 3, 0, Math.PI * 2);
       gctx.fill();
 
-      // Update and Draw Items
       for (let i = items.length - 1; i >= 0; i--) {
         const it = items[i];
         it.y += it.speed;
-
         if (it.type === 'food') {
           gctx.fillStyle = '#fbbf24';
           gctx.font = '20px serif';
@@ -945,8 +850,6 @@
           gctx.font = '20px serif';
           gctx.fillText('💣', it.x - 10, it.y);
         }
-
-        // Collision Check
         const dist = Math.hypot(it.x - playerX, it.y - (gameCanvas.height - 25));
         if (dist < 28) {
           if (it.type === 'food') {
@@ -958,7 +861,7 @@
           } else {
             playSound('walk');
             gameActive = false;
-            alert(`Упс! Бомбочка! Игра окончена. Твой счет: ${gameScore}`);
+            alert(`Чиназис! Бомбочка! Игра окончена. Твой счёт: ${gameScore}. Мог мог.`);
             document.getElementById('gameStartOverlay').classList.remove('hidden');
             return;
           }
@@ -967,21 +870,19 @@
           items.splice(i, 1);
         }
       }
-
       gameLoopId = requestAnimationFrame(runGame);
     }
 
     /* =======================================================
-       INITIALIZATION
+       INIT
        ======================================================= */
     window.onload = function() {
       resizeCanvas();
       updateUI();
       requestAnimationFrame(renderSpider);
 
-      // Initial friendly greeting
       setTimeout(() => {
-        showSpeech("Привет, Алёна! Я Гарик! Жми на кнопки или погладь меня!");
+        showSpeech("Привет, коть! Я Гарик! Жми кнопки или погладь меня! Wiwiwi 🕷️");
       }, 800);
     };
   </script>
